@@ -5,7 +5,8 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+=Install
+* Use rbenv to get the correct version automatically. It's specified in .ruby-version
 
 * System dependencies
 

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  scope module: "api", as: "api" do
+    namespace :v1, defaults: { format: :json } do
+      resource :ping, only: [:show]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
