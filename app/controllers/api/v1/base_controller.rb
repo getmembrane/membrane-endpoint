@@ -1,14 +1,36 @@
-class API::V1::BaseController < ApplicationController
-  include Pundit
+class Api::V1::BaseController < ApplicationController
+  #include Pundit
 
   protect_from_forgery with: :null_session
 
-  before_action :authenticate_api_key
-  before_action :authenticate_token
+  before_action :destroy_session
 
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
+  def destroy_session
+      request.session_options[:skip] = true
+  end
+
+  def not_found
+      return api_error(status: 404, errors: 'Not found')
+  end
+
+  def api_error(status: 500, errors: [])
+      unless Rails.env.production?
+          puts errors.full_messages if errors.respond_to? :full_messages
+      end
+
+      head status: status and return if errors.empty?
+
+      render json: ActiveModel::Serializer.new(errors).to_json, status: status
+  end
+
+  #before_action :authenticate_api_key
+  #before_action :authenticate_token
+
+  #after_action :verify_authorized, except: :index
+  #after_action :verify_policy_scoped, only: :index
+=begin
   private
 
   def authenticate_api_key
@@ -58,4 +80,5 @@ class API::V1::BaseController < ApplicationController
   def current_organization_account
     @current_organization_account ||= current_organization_accounts.first if current_user
   end
+=end
 end
