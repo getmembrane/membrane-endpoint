@@ -1,0 +1,101 @@
+"NotFoundError": {
+  "properties": {
+    "errors": {
+      "type": "Array"
+    }
+  },
+  "required": ["errors"],
+  "example": {
+    "errors": ["Example Resource not found"]
+  }
+},
+"UnprocessableEntityError": {
+  "properties": {
+    "errors": {
+      "type": "Array"
+    }
+  },
+  "required": ["errors"],
+  "example": {
+    "errors": ["error message", "other error message", "yet another error message"]
+  }
+},
+"SessionUnprocessableEntityError": {
+  "properties": {
+    "errors": {
+      "type": "Array"
+    }
+  },
+  "required": ["errors"],
+  "example": {
+    "errors": [
+       "Invalid email or password"
+    ]
+  }
+},
+"InternalServerError": {
+  "properties": {
+    "errors": {
+      "type": "Array"
+    }
+  },
+  "required": ["errors"],
+  "example": {
+    "errors": ["Internal server error"]
+  }
+},
+"UnauthorizedError": {
+  "properties": {
+    "errors": {
+      "type": "Array"
+    }
+  },
+  "required": ["errors"],
+  "example": {
+    "error": ["Invalid or missing API Key"]
+  }
+},
+"ForbiddenError": {
+  "properties": {
+    "error": {
+      "type": "Array"
+    }
+  },
+  "required": ["errors"],
+  "example": {
+    "errors": ["No access to resource or action"]
+  }
+},
+"MissingParametersError": {
+  "properties": {
+    "error": {
+      "type": "Array"
+    }
+  },
+  "required": ["errors"],
+  "example": {
+    "errors": ["Invalid request parameters: param is missing or the value is empty: user"]
+  }
+},
+"PageMetadata": {
+  "properties": {
+    "current_page": {
+      "type": "number"
+    },
+    "per_page": {
+      "type": "number"
+    },
+    "total_count": {
+      "type": "number"
+    }
+  },
+  "example": {
+    "current_page": 1,
+    "per_page": 100000,
+    "total_count": 1
+  }
+},
+"EmptyResponse": {
+  "properties": {},
+  "example": {}
+}

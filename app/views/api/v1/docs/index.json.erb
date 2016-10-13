@@ -1,0 +1,20 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Membrane API v1 docs"
+  },
+  "host": "<%= request.host_with_port %>",
+  "basePath": "/",
+  "paths": {
+    <%= render partial: "api/v1/docs/example_resource/paths" %>,
+    <%= render partial: "api/v1/docs/sessions/paths" %>,
+    <%= render partial: "api/v1/docs/ping/paths" %>,
+    <%= render partial: "api/v1/docs/clients/paths" %>
+  },
+  "definitions": {
+    <%= render partial: "api/v1/docs/common_definitions" %>,
+    <%= render partial: "api/v1/docs/clients/definitions" %>,
+    <%= render partial: "api/v1/docs/sessions/definitions" %>
+  }
+}

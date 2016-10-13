@@ -1,0 +1,97 @@
+"/v1/sessions": {
+  "post": {
+    "description":"<%= basic_permission_table('| YES | YES | YES | YES | YES | NO |').html_safe %> <%= description('Creates new session token for user') %>",
+    "summary": "Creates session token",
+    "tags": [
+      "sessions"
+    ],
+    "parameters": [
+      {
+        "name": "session[email]",
+        "in": "formData",
+        "description": "user's email",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "session[password]",
+        "in": "formData",
+        "description": "user's password",
+        "required": true,
+        "type": "string",
+        "format": "password"
+      }
+    ],
+    "responses": {
+      "201": {
+        "description": "Authorization Token + User information",
+        "schema": {
+          "$ref": "#/definitions/Session"
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "schema": {
+          "$ref": "#/definitions/UnauthorizedError"
+        }
+      },
+      "422": {
+        "description": "Invalid data",
+        "schema": {
+          "$ref": "#/definitions/SessionUnprocessableEntityError"
+        }
+      },
+      "500": {
+        "description": "Internal server error",
+        "schema": {
+          "$ref": "#/definitions/InternalServerError"
+        }
+      }
+    }
+  },
+  "get": {
+    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | YES |').html_safe %> <%= description('Show details of current used token for user') %>",
+    "summary": "Show session token",
+    "tags":[
+      "sessions"
+    ],
+    "responses": {
+      "200": {
+        "description": "Success response",
+        "schema": {
+          "$ref": "#/definitions/AuthorizationToken"
+        }
+      },
+      "403": {
+        "description": "No access to resource or action",
+        "schema": {
+          "$ref": "#/definitions/ForbiddenError"
+        }
+      }
+    }
+  },
+  "put": {
+    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Update exists AuthorizationToken') %>",
+    "summary": "Update AuthorizationToken",
+    "tags":[
+      "sessions"
+    ],
+    "parameters": [
+      {
+        "name": "session[role_id]",
+        "in": "formData",
+        "description": "role id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "responses": {
+      "201": {
+        "description": "Success response",
+        "schema": {
+          "$ref": "#/definitions/AuthorizationToken"
+        }
+      }
+    }
+  }
+}

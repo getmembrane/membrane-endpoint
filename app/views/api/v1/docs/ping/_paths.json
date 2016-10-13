@@ -1,0 +1,28 @@
+"/v1/ping": {
+  "get": {
+    "description": "Pings API and returns Pong message",
+    "summary": "Ping/Pong",
+    "tags":[
+      "ping"
+    ],
+    "parameters": [],
+    "responses": {
+      "200": {
+        "description": "Pong! message",
+        "schema": {
+          "title": "PongMessage",
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "default": "Pong!"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        }
+      }
+    }
+  }
+}

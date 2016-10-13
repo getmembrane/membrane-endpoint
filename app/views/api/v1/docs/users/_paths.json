@@ -1,0 +1,252 @@
+"/v1/users/{id}": {
+  "get": {
+    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | YES |').html_safe %> <%= description('Returns a user information') %>",
+    "summary": "Find user by ID",
+    "tags": [
+      "users"
+    ],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "description": "id of User",
+        "required": true,
+        "type": "integer"
+      }
+    ],
+    "responses": {
+      "200": {
+        "schema": {
+          "$ref": "#/definitions/User/wrapped"
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "schema": {
+          "$ref": "#/definitions/UnauthorizedError"
+        }
+      },
+      "404": {
+        "description": "Not found",
+        "schema": {
+          "$ref": "#/definitions/NotFoundError"
+        }
+      },
+      "500": {
+        "description": "Internal server error",
+        "schema": {
+          "$ref": "#/definitions/InternalServerError"
+        }
+      }
+    }
+  },
+  "put": {
+    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Update an existing user') %>",
+    "summary": "Update user profile",
+    "tags": [
+      "users"
+    ],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "description": "User ID",
+        "required": true,
+        "type": "integer"
+      },
+      {
+        "name": "user[email]",
+        "in": "formData",
+        "description": "email",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "user[firstname]",
+        "in": "formData",
+        "description": "firstname",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "user[surname]",
+        "in": "formData",
+        "description": "surname",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "user[phone_number]",
+        "in": "formData",
+        "description": "phone_number",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "user[password]",
+        "in": "formData",
+        "description": "password",
+        "required": false,
+        "type": "string",
+        "format": "password"
+      },
+      {
+        "name": "user[role_ids][]",
+        "in": "query",
+        "description": "role ids",
+        "required": false,
+        "type": "array",
+        "collectionFormat": "multi",
+        "items": {
+          "type": "integer"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "schema": {
+          "$ref": "#/definitions/User/wrapped"
+        }
+      }
+    }
+  }
+},
+"/v1/users": {
+  "post": {
+    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Creates User assigned to OrganizationAccount') %>",
+    "summary": "Add a new user to organization account",
+    "tags": [
+      "users"
+    ],
+    "parameters": [
+      {
+        "name": "user[email]",
+        "in": "formData",
+        "description": "email",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "user[firstname]",
+        "in": "formData",
+        "description": "firstname",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "user[surname]",
+        "in": "formData",
+        "description": "surname",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "user[phone_number]",
+        "in": "formData",
+        "description": "phone_number",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "user[password]",
+        "in": "formData",
+        "description": "password",
+        "required": true,
+        "type": "string",
+        "format": "password"
+      },
+      {
+        "name": "user[role_ids][]",
+        "in": "formData",
+        "description": "role ids",
+        "required": true,
+        "type": "array",
+        "collectionFormat": "multi",
+        "items": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "user[organization_account_id]",
+        "in": "formData",
+        "description": "organization account id",
+        "required": true,
+        "type": "integer"
+      }
+    ],
+    "responses": {
+      "201": {
+        "description": "User created",
+        "schema": {
+          "$ref": "#/definitions/User/wrapped"
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "schema": {
+          "$ref": "#/definitions/UnauthorizedError"
+        }
+      },
+      "422": {
+        "description": "Validation errors",
+        "schema": {
+          "$ref": "#/definitions/UnprocessableEntityError"
+        }
+      },
+      "500": {
+        "description": "Internal server error",
+        "schema": {
+          "$ref": "#/definitions/InternalServerError"
+        }
+      }
+    }
+  },
+  "get": {
+    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | YES |').html_safe %> <%= description('Lists users matching given query') %>",
+    "summary": "Users list",
+    "tags": [
+      "users"
+    ],
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "Pagination page number",
+        "required": false,
+        "type": "integer"
+      },
+      {
+        "name": "per_page",
+        "in": "query",
+        "description": "Pagination per_page limit, default: 20",
+        "required": false,
+        "type": "integer"
+      },
+      {
+        "name": "query",
+        "in": "query",
+        "description": "Search query, fulltext search by: email",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "All users are listed",
+        "schema": { "$ref": "#/definitions/User/list" }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "schema": {
+          "$ref": "#/definitions/UnauthorizedError"
+        }
+      },
+      "500": {
+        "description": "Internal server error",
+        "schema": {
+          "$ref": "#/definitions/InternalServerError"
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-class API::V1::DocsController < ApplicationController
+class Api::V1::DocsController < ApplicationController
   include Swagger::PermissionTableHelper
   include Swagger::DescriptionHelper
 

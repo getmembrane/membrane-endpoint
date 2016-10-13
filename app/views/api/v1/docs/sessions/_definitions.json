@@ -1,0 +1,67 @@
+"AuthorizationToken": {
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "User authorization token assigned to user, never expires"
+    },
+    "role": {
+      "$ref": "#/definitions/Role"
+    }
+  },
+  "example": {
+    "token": "753ba8d11494f279744b11a2b6c00690",
+    "role": {
+      "id": 1,
+      "name": "advertiser"
+    }
+  },
+  "required": ["token", "role"]
+},
+"AuthorizationToken/wrapped": {
+  "properties": {
+    "authorization_token": { "$ref": "#/definitions/AuthorizationToken" }
+  },
+  "required": ["authorization_token"]
+},
+"Session": {
+  "properties": {
+    "session": {
+      "$ref": "#/definitions/AuthorizationToken/wrapped"
+    },
+    "user": {
+      "$ref": "#/definitions/User"
+    }
+  },
+  "required": ["session", "user"],
+  "example": {
+    "session": {
+      "authorization_token": {
+        "token": "753ba8d11494f279744b11a2b6c00690",
+        "role": {
+          "id": 1,
+          "name": "advertiser"
+        }
+      }
+    },
+    "user": {
+      "id": 1,
+      "email": "foo@bar.com",
+      "organization_account_id": 1,
+      "firstname": "Foo",
+      "surname": "Bar",
+      "phone_number": "1-222-222-222",
+      "created_at": "2015-07-23T13:34:31.368+02:00",
+      "updated_at": "2015-07-23T13:34:31.368+02:00",
+      "roles": [
+        {
+          "id": 1,
+          "name": "advertiser"
+        },
+        {
+          "id": 6,
+          "name": "digital_planner"
+        }
+      ]
+    }
+  }
+}

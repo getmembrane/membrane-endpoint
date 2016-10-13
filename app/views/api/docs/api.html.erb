@@ -1,0 +1,141 @@
+<style>
+  .markdown table { width: 100%; margin: auto;}
+  .markdown th {
+    background-color: white;
+    font-size: 120%;
+  }
+</style>
+
+<script type="text/javascript">
+  $(function() {
+    var url = window.location.search.match(/url=([^&]+)/);
+    if (url && url.length > 1) {
+      url = decodeURIComponent(url[1]);
+    } else {
+      url = window.location.origin + "/v1/docs.json";
+    }
+    window.swaggerUi = new SwaggerUi({
+      url: url,
+      dom_id: "swagger-ui-container",
+      supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+      onComplete: function(swaggerApi, swaggerUi){
+        $('pre code').each(function(i, e) {
+          hljs.highlightBlock(e)
+        });
+        var key = fetchApiKey();
+        if (key) {
+          $("#apiKey").val(key);
+          addApiKeyAuthorization(key);
+        }
+        var token = fetchUserToken();
+        if (token) {
+          $("#userToken").val(token);
+          addUserTokenAuthorization(token);
+        }
+      },
+      onFailure: function(data) {
+        log("Unable to Load SwaggerUI");
+      },
+      docExpansion: "list",
+      // apisSorter: "alpha",
+      validatorUrl: null
+    });
+
+    function storeApiKey(key) {
+      localStorage.setItem("apiKey", key);
+    }
+
+    function fetchApiKey() {
+      return localStorage.getItem("apiKey");
+    }
+
+    function storeUserToken(token) {
+      localStorage.setItem("userToken", token);
+    }
+
+    function fetchUserToken() {
+      return localStorage.getItem("userToken");
+    }
+
+    function addApiKeyAuthorization(key) {
+      if (key && key.trim() != "") {
+        var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("X-Api-Key", key, "header");
+        window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
+        log("added key " + key);
+      }
+    }
+
+    function addUserTokenAuthorization(token) {
+      if (token && token.trim() != "") {
+        var userTokenAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", 'Token token="' + token + '"', "header");
+        window.swaggerUi.api.clientAuthorizations.add("user_token", userTokenAuth);
+        log("added token " + token);
+      }
+    }
+
+    $('#apiKey').change(function() {
+      var key = encodeURIComponent($('#apiKey')[0].value);
+      addApiKeyAuthorization(key);
+      storeApiKey(key);
+    });
+    $('#userToken').change(function() {
+      var token = encodeURIComponent($('#userToken')[0].value);
+      addUserTokenAuthorization(token);
+      storeUserToken(token);
+    });
+
+    window.swaggerUi.load();
+
+    function log() {
+      if ('console' in window) {
+        console.log.apply(console, arguments);
+      }
+    }
+
+    $("#domain-model").click(function(event){
+      $("#domain-model").toggleClass("image-big-size");
+    });
+
+    $(document).mouseup(function(){
+      var i, len;
+      var tds = document.querySelectorAll(".markdown table td");
+      for (i = 0, len = tds.length; i < len; i++)
+        if (tds[i].innerText.indexOf("YES") > -1) tds[i].style.backgroundColor = "#e6ffe6";
+        else if (tds[i].innerText.indexOf("NO") > -1) tds[i].style.backgroundColor = "#ffe6e6";
+    });
+
+  });
+</script>
+
+<div id='header'>
+  <div class="swagger-ui-wrap">
+
+    <div style="width: 51%; float: left;">
+      <div class='input'>
+        <input placeholder="api_key" id="apiKey" name="apiKey" type="text"/>
+        API key
+      </div>
+
+      <div class='input'>
+        <input placeholder="user_token" id="userToken" name="apiToken" type="text"/>
+        <br>User authorization token (see <strong>sessions</strong> resource)
+      </div>
+    </div>
+
+    <div style="width: 49%; float: left;">
+      <div id="domain-model">
+      <a href="#" class="x-js-diagram-image">
+        <img src="./images/api_erd.png"/>
+      </a>
+      <a href="#" class="close-button">&#10006;</a>
+      </div>
+    </div>
+
+    <span style="clear: both;">&nbsp;</span>
+  </div>
+</div>
+
+<div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>
+
+
+<div id="swagger-ui-container" class="swagger-ui-wrap"></div>

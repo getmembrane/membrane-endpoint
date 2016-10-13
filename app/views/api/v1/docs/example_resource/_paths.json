@@ -1,0 +1,43 @@
+"/v1/example_resource": {
+  "get": {
+    "description": "Fake action to show common responses",
+    "summary": "Common responses showcase",
+    "tags": ["example resource"],
+    "responses":{
+      "400": {
+        "description": "Missing parameters",
+        "schema": {
+          "$ref": "#/definitions/MissingParametersError"
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "schema": {
+          "$ref": "#/definitions/UnauthorizedError"
+        }
+      },
+      "404": {
+        "description": "Not found",
+        "schema": {
+          "$ref": "#/definitions/NotFoundError"
+        }
+      },
+      "422": {
+        "description": "Validation errors",
+        "schema": { "$ref": "#/definitions/UnprocessableEntityError" }
+      },
+      "500": {
+        "description": "Internal server error",
+        "schema": {
+          "$ref": "#/definitions/InternalServerError"
+        }
+      },
+      "403": {
+        "description": "No access to resource or action",
+        "schema": {
+          "$ref": "#/definitions/ForbiddenError"
+        }
+      }
+    }
+  }
+}

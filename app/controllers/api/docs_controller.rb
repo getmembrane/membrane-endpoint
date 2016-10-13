@@ -1,7 +1,7 @@
-class API::DocsController < ApplicationController
+class Api::DocsController < ApplicationController
   http_basic_authenticate_with(
-    name:     ENV["DOCUMENTATION_HTTP_BASIC_AUTH_USER"],
-    password: ENV["DOCUMENTATION_HTTP_BASIC_AUTH_PASSWORD"]
+    name:     "docs",
+    password: "docs"
   )
 
   layout "docs/layout"
@@ -10,10 +10,5 @@ class API::DocsController < ApplicationController
   end
 
   def api
-  end
-
-  def changelog
-    text = IO.read(File.join(Rails.root, "CHANGELOG.md"))
-    @changelog_content = Kramdown::Document.new(text).to_html.html_safe
   end
 end
