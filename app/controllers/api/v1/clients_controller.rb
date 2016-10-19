@@ -1,8 +1,16 @@
 class Api::V1::ClientsController < Api::V1::BaseController
 
     def show
-        client = Client.find(params[:id])
-        render(json: Api::V1::ClientSerializer.new(client).to_json)
+        client = [client_id: params[:id]]
+
+        if client
+          profile_id = get_profile(client)
+          client.push(profile_id: profile_id)
+          render json: client
+        else
+          render json: { errors: client.errors.full_messages }, status: :unprocessable_entity
+        end
+
     end
 
     def update
@@ -12,5 +20,11 @@ class Api::V1::ClientsController < Api::V1::BaseController
         else
           render json: { errors: client.errors.full_messages }, status: :unprocessable_entity
         end
+    end
+
+    private
+
+    def get_profile client_id
+      @profile_id = 13; #Just mocking something up
     end
 end
