@@ -1,0 +1,75 @@
+"/v1/reports/{id}": {
+
+},
+"/v1/reports": {
+  "post": {
+    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Creates Report') %>",
+    "summary": "Add a new report",
+    "tags": [
+      "reports"
+    ],
+    "parameters": [
+        {
+            "id": "client_id",
+            "in": "formData",
+            "description": "client_id",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "id": "profile_id",
+            "in": "formData",
+            "description": "profile_id",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "id": "accuracy",
+            "in": "formData",
+            "description": "The propability of which client belongs to profile_id",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "id": "source",
+            "in": "formData",
+            "description": "the site or app that is reporting",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "id": "content",
+            "in": "formData",
+            "description": "The comment that was reported",
+            "required": true,
+            "type": "string"
+        }
+    ],
+    "responses": {
+      "201": {
+        "description": "Report created",
+        "schema": {
+          "$ref": "#/definitions/Report/wrapped"
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "schema": {
+          "$ref": "#/definitions/UnauthorizedError"
+        }
+      },
+      "422": {
+        "description": "Validation errors",
+        "schema": {
+          "$ref": "#/definitions/UnprocessableEntityError"
+        }
+      },
+      "500": {
+        "description": "Internal server error",
+        "schema": {
+          "$ref": "#/definitions/InternalServerError"
+        }
+      }
+    }
+  }
+}
