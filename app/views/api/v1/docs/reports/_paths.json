@@ -10,35 +10,35 @@
     ],
     "parameters": [
         {
-            "id": "client_id",
+            "name": "client_id",
             "in": "formData",
-            "description": "client_id",
+            "description": "Abusing client",
             "required": true,
             "type": "string"
         },
         {
-            "id": "profile_id",
+            "name": "profile_id",
             "in": "formData",
-            "description": "profile_id",
+            "description": "The profile the client belongs to",
             "required": true,
             "type": "string"
         },
         {
-            "id": "accuracy",
+            "name": "accuracy",
             "in": "formData",
             "description": "The propability of which client belongs to profile_id",
             "required": true,
             "type": "string"
         },
         {
-            "id": "source",
+            "name": "source",
             "in": "formData",
             "description": "the site or app that is reporting",
             "required": true,
             "type": "string"
         },
         {
-            "id": "content",
+            "name": "content",
             "in": "formData",
             "description": "The comment that was reported",
             "required": true,
