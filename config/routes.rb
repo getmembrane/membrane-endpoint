@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-    scope module: "api", as: "api" do
-        namespace :v1, defaults: { format: :json } do
+    namespace :api, defaults: { format: :json } constraints: { subdomain: 'api' }, path: '/' do
+        scope module :v1 do
             resource :ping, only: [:show]
             resources :clients, only: [:create, :show, :update]
             resources :reports, only: [:create, :destroy]
