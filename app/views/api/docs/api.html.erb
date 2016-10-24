@@ -12,7 +12,7 @@
     if (url && url.length > 1) {
       url = decodeURIComponent(url[1]);
     } else {
-      url = window.location.origin + "/v1/docs.json";
+      url = window.location.origin + "/docs.json";
     }
     window.swaggerUi = new SwaggerUi({
       url: url,
