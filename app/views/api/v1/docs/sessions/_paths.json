@@ -1,4 +1,4 @@
-"/v1/sessions": {
+"/sessions": {
   "post": {
     "description":"<%= basic_permission_table('| YES | YES | YES | YES | YES | NO |').html_safe %> <%= description('Creates new session token for user') %>",
     "summary": "Creates session token",

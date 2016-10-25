@@ -1,7 +1,7 @@
-"/v1/reports/{id}": {
+"/reports/{id}": {
 
 },
-"/v1/reports": {
+"/reports": {
   "post": {
     "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Creates Report') %>",
     "summary": "Add a new report",

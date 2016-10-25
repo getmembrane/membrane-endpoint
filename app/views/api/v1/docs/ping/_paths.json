@@ -1,4 +1,4 @@
-"/v1/ping": {
+"/ping": {
   "get": {
     "description": "Pings API and returns Pong message",
     "summary": "Ping/Pong",

@@ -1,4 +1,4 @@
-"/v1/clients/{id}": {
+"/clients/{id}": {
   "get": {
     "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | YES |').html_safe %> <%= description('Returns a user information') %>",
     "summary": "Find client by ID",
@@ -64,7 +64,7 @@
     }
   }
 },
-"/v1/clients": {
+"/clients": {
   "post": {
     "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Creates User assigned to OrganizationAccount') %>",
     "summary": "Add a new client",

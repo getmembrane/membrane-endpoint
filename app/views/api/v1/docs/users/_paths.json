@@ -1,4 +1,4 @@
-"/v1/users/{id}": {
+"/users/{id}": {
   "get": {
     "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | YES |').html_safe %> <%= description('Returns a user information') %>",
     "summary": "Find user by ID",
@@ -111,7 +111,7 @@
     }
   }
 },
-"/v1/users": {
+"/users": {
   "post": {
     "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Creates User assigned to OrganizationAccount') %>",
     "summary": "Add a new user to organization account",
