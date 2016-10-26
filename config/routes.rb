@@ -13,7 +13,7 @@ Rails.application.routes.draw do
             resource :ping, only: [:show]
             resources :clients, only: [:create, :show, :update]
             resources :reports, only: [:create, :destroy]
-            resources :users, only: [:index, :create, :show, :update, :destroy]
+            #resources :users, only: [:index, :create, :show, :update, :destroy]
 
             get "docs.json", to: "docs#index"
         end
@@ -24,4 +24,6 @@ Rails.application.routes.draw do
 
         get "docs(/:action)", controller: :docs, defaults: { action: "index", format: :html }
     end
+
+    root "home#index"
 end
