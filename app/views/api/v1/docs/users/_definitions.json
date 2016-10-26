@@ -14,20 +14,6 @@
     "surname": {
       "type": "string"
     },
-    "organization_account_id": {
-      "type": "integer",
-      "description": "The unique ID of oragnization"
-    },
-    "role_ids": {
-      "type": "array",
-      "items": { "type": "integer" }
-    },
-    "roles": {
-      "type": "array",
-      "items": [{
-        "$ref": "#/definitions/Role"
-      }]
-    },
     "created_at": {
       "type": "dateTime",
       "description": "Resource creation time"
@@ -38,8 +24,8 @@
     }
   },
   "required": [
-    "email", "firstname", "surname", "organization_account_id", "created_at",
-    "updated_at", "id", "role_ids"
+    "email", "firstname", "surname", "created_at",
+    "updated_at", "id"
   ],
   "example": {
     "id": 1,
@@ -48,13 +34,7 @@
     "firstname": "Napoleon",
     "surname": "Dynamite",
     "created_at": "2016-07-21T15:07:46.130+02:00",
-    "updated_at": "2016-07-21T15:07:46.130+02:00",
-    "roles": [
-      {
-        "id": 1,
-        "name": "small"
-      }
-    ]
+    "updated_at": "2016-07-21T15:07:46.130+02:00"
   }
 },
 "User/wrapped": {

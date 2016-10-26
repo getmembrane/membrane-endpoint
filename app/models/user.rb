@@ -5,4 +5,18 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessor :email, :password, :password_confirmation
+
+  validates :email,
+            presence: true,
+            uniqueness: { case_sensitive: false }
+  validates :password_confirmation,
+            presence: true
+
+  before_validation :downcase_email
+
+  private
+
+  def downcase_email
+      self.email = email.downcase if email.present?
+  end
 end
