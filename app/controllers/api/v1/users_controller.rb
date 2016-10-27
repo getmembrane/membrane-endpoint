@@ -4,4 +4,20 @@ class Api::V1::UsersController < Api::V1::BaseController
         user = User.find(params[:id])
         render(json: Api::V1::UserSerializer.new(user).to_json)
     end
+
+    def create
+        user = User.new(params)
+        logger.debug "User variables: #{user_params}"
+        if user.save
+            render json: user, status: 201, location: [:api, user]
+        else
+            render json: { errors: user.errors }, status: 422
+        end
+    end
+
+    private
+
+    def user_params
+        params.permit(:email, :firstname, :lastname, :password, :password_confirmation)
+    end
 end

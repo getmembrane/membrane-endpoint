@@ -51,28 +51,28 @@
     "parameters": [
       {
         "name": "user[email]",
-        "in": "formData",
+        "in": "body",
         "description": "email",
         "required": true,
         "type": "string"
       },
       {
         "name": "user[firstname]",
-        "in": "formData",
+        "in": "body",
         "description": "firstname",
         "required": true,
         "type": "string"
       },
       {
-        "name": "user[surname]",
-        "in": "formData",
-        "description": "surname",
+        "name": "user[lastname]",
+        "in": "body",
+        "description": "lastname",
         "required": true,
         "type": "string"
       },
       {
         "name": "user[password]",
-        "in": "formData",
+        "in": "body",
         "description": "password",
         "required": true,
         "type": "string",
@@ -80,7 +80,7 @@
       },
       {
         "name": "user[password_confirmation]",
-        "in": "formData",
+        "in": "body",
         "description": "password confirmation",
         "required": true,
         "type": "string",
