@@ -43,7 +43,7 @@
 },
 "/users": {
   "post": {
-    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Creates User assigned to OrganizationAccount') %>",
+    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Creates User') %>",
     "summary": "Add a new user",
     "tags": [
       "users"
@@ -51,28 +51,28 @@
     "parameters": [
       {
         "name": "user[email]",
-        "in": "body",
+        "in": "query",
         "description": "email",
         "required": true,
         "type": "string"
       },
       {
         "name": "user[firstname]",
-        "in": "body",
+        "in": "query",
         "description": "firstname",
         "required": true,
         "type": "string"
       },
       {
         "name": "user[lastname]",
-        "in": "body",
+        "in": "query",
         "description": "lastname",
         "required": true,
         "type": "string"
       },
       {
         "name": "user[password]",
-        "in": "body",
+        "in": "query",
         "description": "password",
         "required": true,
         "type": "string",
@@ -80,7 +80,7 @@
       },
       {
         "name": "user[password_confirmation]",
-        "in": "body",
+        "in": "query",
         "description": "password confirmation",
         "required": true,
         "type": "string",

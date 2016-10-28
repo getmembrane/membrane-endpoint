@@ -6,7 +6,7 @@ class Api::V1::UsersController < Api::V1::BaseController
     end
 
     def create
-        user = User.new(params)
+        user = User.new(user_params)
         logger.debug "User variables: #{user_params}"
         if user.save
             render json: user, status: 201, location: [:api, user]
@@ -18,6 +18,6 @@ class Api::V1::UsersController < Api::V1::BaseController
     private
 
     def user_params
-        params.permit(:email, :firstname, :lastname, :password, :password_confirmation)
+        params.require(:user).permit(:email, :firstname, :lastname, :password, :password_confirmation)
     end
 end
