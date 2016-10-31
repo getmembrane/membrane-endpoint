@@ -1,6 +1,6 @@
 "/clients/{id}": {
   "get": {
-    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | YES |').html_safe %> <%= description('Returns a user information') %>",
+    "description":"<%= basic_permission_table('| NO | NO | NO | YES |').html_safe %> <%= description('Returns a user information') %>",
     "summary": "Find client by ID",
     "tags": [
       "clients"
@@ -41,7 +41,7 @@
     }
   },
   "put": {
-    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Update an existing user') %>",
+    "description":"<%= basic_permission_table('| NO | NO | NO | YES |').html_safe %> <%= description('Update an existing user') %>",
     "summary": "Update client profile",
     "tags": [
       "clients"
@@ -66,7 +66,7 @@
 },
 "/clients": {
   "post": {
-    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Creates User assigned to OrganizationAccount') %>",
+    "description":"<%= basic_permission_table('| NO | NO | NO | YES |').html_safe %> <%= description('Creates User assigned to OrganizationAccount') %>",
     "summary": "Add a new client",
     "tags": [
       "clients"
@@ -97,54 +97,6 @@
         "description": "Validation errors",
         "schema": {
           "$ref": "#/definitions/UnprocessableEntityError"
-        }
-      },
-      "500": {
-        "description": "Internal server error",
-        "schema": {
-          "$ref": "#/definitions/InternalServerError"
-        }
-      }
-    }
-  },
-  "get": {
-    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | YES |').html_safe %> <%= description('Lists users matching given query') %>",
-    "summary": "Clients list",
-    "tags": [
-      "clients"
-    ],
-    "parameters": [
-      {
-        "name": "page",
-        "in": "query",
-        "description": "Pagination page number",
-        "required": false,
-        "type": "integer"
-      },
-      {
-        "name": "per_page",
-        "in": "query",
-        "description": "Pagination per_page limit, default: 20",
-        "required": false,
-        "type": "integer"
-      },
-      {
-        "name": "query",
-        "in": "query",
-        "description": "Search query, fulltext search by: email",
-        "required": false,
-        "type": "string"
-      }
-    ],
-    "responses": {
-      "200": {
-        "description": "All clients are listed",
-        "schema": { "$ref": "#/definitions/Client/list" }
-      },
-      "401": {
-        "description": "Unauthorized",
-        "schema": {
-          "$ref": "#/definitions/UnauthorizedError"
         }
       },
       "500": {

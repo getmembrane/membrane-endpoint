@@ -2,13 +2,13 @@
   "swagger": "2.0",
   "info": {
     "version": "0.1",
-    "title": "Membrane API v1 docs"
+    "title": "Membrane API v1 docs",
+    "contact": "dave@getmembrane.com"
   },
   "host": "<%= request.host_with_port %>",
   "basePath": "/",
   "paths": {
     <%= render partial: "api/v1/docs/example_resource/paths" %>,
-    <%= render partial: "api/v1/docs/sessions/paths" %>,
     <%= render partial: "api/v1/docs/users/paths" %>,
     <%= render partial: "api/v1/docs/ping/paths" %>,
     <%= render partial: "api/v1/docs/clients/paths" %>,
@@ -18,7 +18,6 @@
     <%= render partial: "api/v1/docs/common_definitions" %>,
     <%= render partial: "api/v1/docs/users/definitions" %>,
     <%= render partial: "api/v1/docs/clients/definitions" %>,
-    <%= render partial: "api/v1/docs/reports/definitions" %>,
-    <%= render partial: "api/v1/docs/sessions/definitions" %>
+    <%= render partial: "api/v1/docs/reports/definitions" %>
   }
 }

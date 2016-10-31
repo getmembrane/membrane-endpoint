@@ -1,6 +1,6 @@
 "/users/{id}": {
   "get": {
-    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | YES |').html_safe %> <%= description('Returns a user information') %>",
+    "description":"<%= basic_permission_table('| YES | YES | NO | NO |').html_safe %> <%= description('Returns a user information') %>",
     "summary": "Find user by ID",
     "tags": [
       "users"
@@ -43,7 +43,7 @@
 },
 "/users": {
   "post": {
-    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Creates User') %>",
+    "description":"<%= basic_permission_table('| NO | NO | YES | NO |').html_safe %> <%= description('Creates User') %>",
     "summary": "Add a new user",
     "tags": [
       "users"

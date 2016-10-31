@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Api::V1::UsersController do
     before(:each) { request.headers['Accept'] = "application/vnd.membrane-endpoint.v1" }
 
-      describe "GET #show" do
+    describe "GET #show" do
         before(:each) do
           @user = FactoryGirl.create :user
           get :show, id: @user.id, format: :json
@@ -15,7 +15,7 @@ describe Api::V1::UsersController do
         end
 
         it { should respond_with 200 }
-      end
+    end
 end
 
 
