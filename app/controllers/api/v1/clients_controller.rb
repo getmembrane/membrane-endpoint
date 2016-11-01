@@ -21,6 +21,6 @@ class Api::V1::ClientsController < Api::V1::BaseController
     private
 
     def get_profile client_id
-      @profile_id = client_id * 10; #Just mocking something up
+      @profile_id = client_id * 22; #Just mocking something up
     end
 end
