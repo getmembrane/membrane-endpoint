@@ -1,7 +1,6 @@
 class Api::V1::ReportSerializer < Api::V1::BaseSerializer
     attributes  :id,
                 :client_id,
-                :profile_id,
                 :accuracy,
                 :content,
                 :created_at,

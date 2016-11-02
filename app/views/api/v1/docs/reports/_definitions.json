@@ -9,10 +9,6 @@
         "type": "string",
         "description": "The reported client."
     },
-    "profile_id": {
-        "type": "string",
-        "description": "The reported profile."
-    },
     "accuracy": {
         "type": "string",
         "description": "The certainty that the client belongs to the profile."
@@ -37,7 +33,6 @@
   "required": [
     "id",
     "client_id",
-    "profile_id",
     "source",
     "accuracy",
     "content"
@@ -45,7 +40,6 @@
   "example": {
     "id": 4,
     "client_id": 4,
-    "profile_id": 40,
     "accuracy": 0.8,
     "content": "The cake is a lie.",
     "created_at": "2016-07-21T15:07:46.130+02:00",
