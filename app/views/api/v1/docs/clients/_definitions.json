@@ -19,6 +19,7 @@
   ],
   "example": {
     "id": 4,
+    "profile_id": 8,
     "accuracy": 0.8,
     "assesment": "reject"
   }
