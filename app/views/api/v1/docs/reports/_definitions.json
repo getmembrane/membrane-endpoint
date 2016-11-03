@@ -9,10 +9,6 @@
         "type": "string",
         "description": "The reported client."
     },
-    "accuracy": {
-        "type": "string",
-        "description": "The certainty that the client belongs to the profile."
-    },
     "source": {
         "type": "string",
         "description": "The site or app that reported."
@@ -34,7 +30,6 @@
     "id",
     "client_id",
     "source",
-    "accuracy",
     "content"
   ],
   "example": {
