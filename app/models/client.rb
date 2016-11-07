@@ -4,7 +4,7 @@ class Client < ActiveRecord::Base
     #just mocking something up
     @profile_data = {
               profile_id: client_id * 2,
-              accuracy: rand().round(2)
+              accuracy: 0.8
             }
   end
 
