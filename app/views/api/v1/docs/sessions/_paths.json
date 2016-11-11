@@ -1,6 +1,6 @@
 "/sessions": {
   "post": {
-    "description":"<%= basic_permission_table('| YES | YES | YES | NO |').html_safe %> <%= description('Creates new session token for user') %>",
+    "description":"<%= basic_permission_table('| NO | NO | YES | NO |').html_safe %> <%= description('Creates new session token for user') %>",
     "summary": "Creates session token",
     "tags": [
       "sessions"
@@ -50,7 +50,7 @@
     }
   },
   "get": {
-    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | YES |').html_safe %> <%= description('Show details of current used token for user') %>",
+    "description":"<%= basic_permission_table('| YES | YES | YES | YES | ').html_safe %> <%= description('Show details of current used token for user') %>",
     "summary": "Show session token",
     "tags":[
       "sessions"
@@ -71,7 +71,7 @@
     }
   },
   "put": {
-    "description":"<%= basic_permission_table('| YES | YES | YES | YES | NO | NO |').html_safe %> <%= description('Update exists AuthorizationToken') %>",
+    "description":"<%= basic_permission_table('| YES | YES | YES | YES |').html_safe %> <%= description('Update exists AuthorizationToken') %>",
     "summary": "Update AuthorizationToken",
     "tags":[
       "sessions"

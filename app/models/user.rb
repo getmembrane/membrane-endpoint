@@ -14,10 +14,18 @@ class User < ActiveRecord::Base
             :confirmation => true
 
   before_validation :downcase_email
+  before_create :generate_authentication_token
 
   private
 
   def downcase_email
       self.email = email.downcase if email.present?
+  end
+
+  def generate_authentication_token
+      loop do
+          self.authentication_token = SecureRandom.base64(64)
+          break unless User.find_by(authentication_token: authentication_token)
+      end
   end
 end

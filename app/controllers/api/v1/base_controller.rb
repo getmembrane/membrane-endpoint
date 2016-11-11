@@ -7,6 +7,8 @@ class Api::V1::BaseController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
+  protected
+
   def destroy_session
       request.session_options[:skip] = true
   end
@@ -25,60 +27,16 @@ class Api::V1::BaseController < ApplicationController
       render json: ActiveModel::Serializer.new(errors).to_json, status: status
   end
 
-  #before_action :authenticate_api_key
-  #before_action :authenticate_token
+  def authenticate_user!
+      token, options = ActionController::HttpAuthentication::Token.token_and_options(request)
 
-  #after_action :verify_authorized, except: :index
-  #after_action :verify_policy_scoped, only: :index
-=begin
-  private
+      user_email = options.blank?? nil : options[:email]
+      user = user_email && User.find_by(email: user_email)
 
-  def authenticate_api_key
-    return if current_api_key
-
-    render json: { errors: [I18n.t(:invalid_api_key, scope: [:controllers, :errors])] }, status: :unauthorized
-  end
-
-  def current_api_key
-    @current_api_key ||= ApiKey.find_by(key: request.headers["X-Api-Key"])
-  end
-
-  def authenticate_token
-    return if current_authorization_token
-
-    render json: { errors: [I18n.t(:invalid_token, scope: [:controllers, :errors])] }, status: :unauthorized
-  end
-
-  def current_user
-    @current_user ||= current_authorization_token.user
-  end
-
-  def current_token
-    @current_token ||=
-      begin
-        token, _options = ActionController::HttpAuthentication::Token.token_and_options(request)
-        token
+      if user && ActiveSupport::SecurityUtils.secure_compare(user.authentication_token, token)
+          @current_user = user
+      else
+          return unauthenticated!
       end
   end
-
-  def current_authorization_token
-    @current_authorization_token ||= AuthorizationToken.find_by(api_key: current_api_key, token: current_token)
-  end
-
-  def pundit_user
-    current_authorization_token
-  end
-
-  def current_organization_accounts
-    @current_organization_accounts ||= begin
-      scope = OrganizationAccount.where(api_key: current_api_key)
-      scope = scope.joins(:users).where(users: { id: current_user.id }) if current_user
-      scope
-    end
-  end
-
-  def current_organization_account
-    @current_organization_account ||= current_organization_accounts.first if current_user
-  end
-=end
 end

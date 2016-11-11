@@ -10,11 +10,15 @@
   "paths": {
     <%= render partial: "api/v1/docs/example_resource/paths" %>,
     <%= render partial: "api/v1/docs/ping/paths" %>,
+    <%= render partial: "api/v1/docs/sessions/paths" %>,
+    <%= render partial: "api/v1/docs/users/paths" %>,
     <%= render partial: "api/v1/docs/clients/paths" %>,
     <%= render partial: "api/v1/docs/reports/paths" %>
   },
   "definitions": {
     <%= render partial: "api/v1/docs/common_definitions" %>,
+    <%= render partial: "api/v1/docs/sessions/definitions" %>,
+    <%= render partial: "api/v1/docs/users/definitions" %>,
     <%= render partial: "api/v1/docs/clients/definitions" %>,
     <%= render partial: "api/v1/docs/reports/definitions" %>
   }
