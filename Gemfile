@@ -4,6 +4,8 @@ ruby '2.3.1'
 gem 'rails', '4.2.4'
 gem 'pg'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'pundit'
+gem 'rack-cors'
 
 group :assets do
   gem 'sass-rails', '~> 5.0'

@@ -1,16 +1,31 @@
 class Api::V1::BaseController < ApplicationController
-  #include Pundit
+  include Pundit
 
   protect_from_forgery with: :null_session
 
   before_action :destroy_session
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from Pundit::NotAuthorizedError, with: :unauthorized!
 
+  attr_accessor :current_user
   protected
 
   def destroy_session
       request.session_options[:skip] = true
+  end
+
+  def unauthenticated!
+      response.headers['WWW-Authenticate'] = "Token realm=Application"
+      render json: { error: 'Bad credentials' }, status: 401
+  end
+
+  def unauthorized!
+      render json: { error: 'not authorized' }, status: 403
+  end
+
+  def invalid_resource!(errors = [])
+    api_error(status: 422, errors: errors)
   end
 
   def not_found
