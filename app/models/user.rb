@@ -1,8 +1,4 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  #devise :database_authenticatable, :registerable,
-#         :recoverable, :rememberable, :trackable, :validatable
 
   validates :email,
             presence: true,
@@ -15,18 +11,11 @@ class User < ActiveRecord::Base
 
   before_validation :downcase_email
   before_create :generate_authentication_token
-  before_save :encrypt_password
-  after_save :clear_password
 
-  def encrypt_password
-    if password.present?
-      self.salt = BCrypt::Engine.generate_salt
-      self.password_digest= BCrypt::Engine.hash_secret(password, salt)
-    end
-  end
+  has_secure_password
 
-  def clear_password
-    self.password = nil
+  def fullname
+      [firstname, lastname].join(" ")
   end
 
   def authenticate(user,password)
