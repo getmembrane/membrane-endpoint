@@ -22,8 +22,15 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "fails because password to short" do
+  describe "when password is to short" do
     before { @user.password = 'meep' }
+    it { should_not be_valid }
+  end
+
+  describe "when password confirmation doesnt match" do
+    before { @user.password = "12345678"
+            @user.password_confirmation = "1234567890"
+        }
     it { should_not be_valid }
   end
 end

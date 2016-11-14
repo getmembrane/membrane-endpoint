@@ -18,13 +18,13 @@ class User < ActiveRecord::Base
       [firstname, lastname].join(" ")
   end
 
-  def authenticate(user,password)
-      if user.password === password
-          return true
-      else
-          return false
-      end
-  end
+  #def authenticate(user,password)
+#      if user.password === password
+#          return true
+#      else
+#          return false
+#      end
+ # end
 
   # Returns true if the given token matches the digest.
   def authenticated?(attribute, token)
