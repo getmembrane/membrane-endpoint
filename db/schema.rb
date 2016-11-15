@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114114006) do
+ActiveRecord::Schema.define(version: 20161115170016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "key",        null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "api_keys", ["key"], name: "index_api_keys_on_key", unique: true, using: :btree
 
   create_table "clients", force: :cascade do |t|
   end
@@ -38,6 +47,7 @@ ActiveRecord::Schema.define(version: 20161114114006) do
     t.string   "email",                          default: "", null: false
     t.string   "authentication_token"
     t.string   "password_digest"
+    t.integer  "api_key_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

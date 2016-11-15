@@ -1,7 +1,6 @@
 class Api::V1::SessionsController < Api::V1::BaseController
-
-    def new
-    end
+    skip_before_action :authenticate_token, only: :create
+    after_action :skip_authorization, only: :create
 
     def create
         user = User.find_by(email: create_params[:email])
@@ -20,5 +19,9 @@ class Api::V1::SessionsController < Api::V1::BaseController
 
     def create_params
         params.require(:session).permit(:email, :password)
+    end
+
+    def show_params
+        params.require(:session).permit(:email)
     end
 end

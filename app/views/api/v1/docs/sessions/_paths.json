@@ -48,50 +48,5 @@
         }
       }
     }
-  },
-  "get": {
-    "description":"<%= basic_permission_table('| YES | YES | YES | YES | ').html_safe %> <%= description('Show details of current used token for user') %>",
-    "summary": "Show session token",
-    "tags":[
-      "sessions"
-    ],
-    "responses": {
-      "200": {
-        "description": "Success response",
-        "schema": {
-          "$ref": "#/definitions/AuthorizationToken"
-        }
-      },
-      "403": {
-        "description": "No access to resource or action",
-        "schema": {
-          "$ref": "#/definitions/ForbiddenError"
-        }
-      }
-    }
-  },
-  "put": {
-    "description":"<%= basic_permission_table('| YES | YES | YES | YES |').html_safe %> <%= description('Update exists AuthorizationToken') %>",
-    "summary": "Update AuthorizationToken",
-    "tags":[
-      "sessions"
-    ],
-    "parameters": [
-      {
-        "name": "session[role_id]",
-        "in": "formData",
-        "description": "role id",
-        "required": true,
-        "type": "string"
-      }
-    ],
-    "responses": {
-      "201": {
-        "description": "Success response",
-        "schema": {
-          "$ref": "#/definitions/AuthorizationToken"
-        }
-      }
-    }
   }
 }

@@ -18,30 +18,7 @@ class User < ActiveRecord::Base
       [firstname, lastname].join(" ")
   end
 
-  #def authenticate(user,password)
-#      if user.password === password
-#          return true
-#      else
-#          return false
-#      end
- # end
-
-  # Returns true if the given token matches the digest.
-  def authenticated?(attribute, token)
-    digest = send("#{attribute}_digest")
-    return false if digest.nil?
-    BCrypt::Password.new(digest).is_password?(token)
-  end
-
   private
-
-  # Returns the hash digest of the given string.
-  def digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
-  end
-
 
   def downcase_email
       self.email = email.downcase if email.present?
@@ -49,7 +26,7 @@ class User < ActiveRecord::Base
 
   def generate_authentication_token
       loop do
-          self.authentication_token = SecureRandom.base64(64)
+          self.authentication_token = SecureRandom.urlsafe_base64(64)
           break unless User.find_by(authentication_token: authentication_token)
       end
   end
